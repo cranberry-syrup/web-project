@@ -14,7 +14,7 @@
                     <h5 class="card-title">{{ job.title }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Зарплата: {{ job.salary }}₽</h6>
                     <p class="card-text">{{ job.about }}</p>
-                    <footer class="blockquote-footer">Работодатель - {{job.user.name}}, Дата создания - {{job.created_date}}\n</footer>
+                    <footer class="blockquote-footer">Работодатель - {{job.user.name}}, Дата создания - {{job.created_date}}</footer>
                     {% if current_user.is_authenticated and current_user.type == 'employee' %}
                         <a href="mailto:{{ job.user.email }}?subject=Заявка на вакансию: {{ job.title }}" class="btn btn-primary">Отправить заявку</a>
                     {% elif current_user.is_authenticated and current_user == job.user %}
