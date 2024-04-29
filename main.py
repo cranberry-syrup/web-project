@@ -3,7 +3,7 @@ import os
 from flask import Flask, render_template, url_for, redirect, request, abort
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 
-from data import db_session, jobs_api
+from data import db_session
 from data.forms import RegistrationForm, LoginForm, JobForm
 from data.users import User
 from data.jobs import Job
@@ -12,7 +12,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
 login_manager = LoginManager()
 login_manager.init_app(app)
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -158,8 +157,7 @@ def job_delete(id):
 
 def main():
     db_session.global_init("db/data.db")
-    app.register_blueprint(jobs_api.blueprint)
-    app.run(host='127.0.0.1', port=5000)
+    app.run(host='127.0.0.1', port=8080)
 
 
 if __name__ == '__main__':
