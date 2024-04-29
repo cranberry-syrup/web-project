@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, url_for, redirect, request, abort
+from flask import Flask, render_template, url_for, redirect, request, abort, make_response, jsonify
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 
 from data import db_session
@@ -153,6 +153,16 @@ def job_delete(id):
     else:
         abort(404)
     return redirect('/home')
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
+@app.errorhandler(400)
+def bad_request(_):
+    return make_response(jsonify({'error': 'Bad Request'}), 400)
 
 
 def main():
